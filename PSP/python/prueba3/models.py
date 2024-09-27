@@ -21,3 +21,29 @@ class Alumno:
 
     def get_apellidos(self):
         return self.apellidos
+    
+    def set_apellidos(self, apellidos):
+
+        self.apellidos = apellidos
+
+    def get_edad(self):
+
+        return self.edad
+    
+    def set_edad(self, edad):
+        self.edad = edad
+
+
+    def get_curso(self):
+        return self.curso
+    
+
+    def set_curso(self, curso):
+
+        self.curso = curso
+
+
+
+    def saludo(self):
+
+        print(f"Hola soy {self.nombre}")
