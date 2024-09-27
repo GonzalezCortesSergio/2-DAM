@@ -1,3 +1,4 @@
+
 class Alumno:
     
     nombre: str
@@ -5,7 +6,7 @@ class Alumno:
     edad: int
     curso: str
 
-    def __init__(self, nombre, apellidos, edad, curso):
+    def __init__(self, nombre: str, apellidos: str, edad: int, curso: str):
         self.nombre = nombre
         self.apellidos = apellidos
         self.edad = edad
