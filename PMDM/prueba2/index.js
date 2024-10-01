@@ -14,5 +14,4 @@ $( document ).ready(() => {
         $("main").addClass("bg-secondary")
     })
 
-
 })
