@@ -1,0 +1,11 @@
+.card {
+
+    width: 15%;
+}
+
+.card-img-top {
+
+    position:relative;
+    left: 35%;
+    bottom: 58px;
+}
