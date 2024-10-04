@@ -1,3 +1,7 @@
+*{
+    font-size: 14pt;
+}
+
 .card {
 
     width: 15%;
@@ -8,4 +12,26 @@
     position:relative;
     left: 35%;
     bottom: 58px;
+}
+
+.planta{
+
+    background-color: #54DF6D;
+    border-radius: 15px;
+}
+
+.veneno {
+
+    background-color: #B78FE1;
+    border-radius: 15px;
+}
+.card-body{
+
+    position: relative;
+
+    bottom: 20px;
+}
+.h5{
+
+    font-weight: 100;
 }
