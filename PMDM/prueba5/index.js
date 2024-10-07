@@ -1,12 +1,31 @@
 $( document ).ready(() => {
 
     $.ajax({
-        url: "http://localhost:9000/place",
+        url: "https://pokeapi.co/api/v2/pokemon/",
         method: "GET"
 
-    }).done(function (data) {
-        debugger;
+    }).done(function (resp) {
         
+        let listadoPokemon = resp.results;
+        
+
+        listadoPokemon.forEach((pokemon, index) => {
+            
+            var template = `
+                <p>
+
+                    <h1 class="pokemon" pokemonid="1">
+                        ${pokemon.name}
+                        <div>
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/${index + 1}.png" />
+                        </div>
+                    </h1>
+                </p>
+            `
+
+            $("#data-content").append(template);
+            console.log(pokemon)
+        });
         /*
         Todo lo que se programa dentro de esta función
         será ejecutado cuando se haya resuelto la 
@@ -19,9 +38,7 @@ $( document ).ready(() => {
         que me llega del servidor y lo convierte a un objeto
         */
 
-        let json = JSON.parse(data);
-        
-        debugger;
+    
     });
 
 });
