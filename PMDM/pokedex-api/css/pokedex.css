@@ -41,7 +41,7 @@ p{
 .card {
 
     width: 15%;
-    height: 30vh;
+    height: 25vh;
 }
 
 .card-img-top {
@@ -67,11 +67,16 @@ p{
 .card-body{
 
     position: relative;
-    bottom: 15vh;
+    bottom: 20vh;
 }
 .h5{
 
     font-weight: 100;
     position: relative;
-    bottom: 15vh;
+    bottom: 17vh;
+}
+
+.modal-content{
+    
+    height: 50vh;
 }
