@@ -1,0 +1,22 @@
+img {
+
+    position: relative;
+    left: 25%;
+    bottom: 7vh;
+}
+
+.card {
+
+    height: 20vh;
+    width: 25%;
+    border-radius: 20px;
+    display: block;
+
+}
+
+a{
+
+    border-radius: 12px;
+    position: relative;
+
+}
