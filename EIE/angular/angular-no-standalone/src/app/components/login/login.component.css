@@ -1,0 +1,31 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+h1{
+    text-align: center;
+}
+
+.centro {
+
+    display: block;
+    text-align: center;
+    margin-top: 10%;
+    
+}
+div {
+
+    text-align: center;
+}
+
+form {
+
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+}
