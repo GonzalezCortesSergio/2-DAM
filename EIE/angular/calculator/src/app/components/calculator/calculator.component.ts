@@ -47,10 +47,6 @@ export class CalculatorComponent {
     this.calculichi+="."
   }
 
-  borrarCaracter() {
-
-    this.calculichi.slice(0, this.calculichi.length - 2);
-  }
 
 
   

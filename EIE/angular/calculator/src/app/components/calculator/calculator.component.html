@@ -1,6 +1,6 @@
-<div class="m-auto w-25 border">
+<div class=" w-25" id="calculator">
 
-<div class="text-center border">
+<div class="text-center border" id="screen">
 
     <p>
         {{value}}
@@ -10,12 +10,10 @@
     </p>
 
 </div>
-<div class="container m-auto">
-    <div class="row justify-content-between">
+<div class="container m-auto" id="buttons">
+    <div class="row justify-content-between mx-1">
 
-        <button class="col-9 btn btn-dark m-1" (click)="borrarCaracter()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-          </svg></button>
+        
         <button class="col-3 btn btn-dark m-1" (click)="addNum(7)">7</button>
         <button class="col-3 btn btn-dark m-1" (click)="addNum(8)">8</button>
         <button class="col-3 btn btn-dark m-1" (click)="addNum(9)">9</button>
@@ -25,6 +23,7 @@
         <button class="col-3 btn btn-dark m-1" (click)="addNum(1)">1</button>
         <button class="col-3 btn btn-dark m-1" (click)="addNum(2)">2</button>
         <button class="col-3 btn btn-dark m-1" (click)="addNum(3)">3</button>
+        <button class="btn btn-dark col-12" (click)="addNum(0)" >0</button>
         <button class="col-3 btn btn-dark m-1" (click)="sumar()">+</button>
         <button class="col-2 btn btn-dark m-1" (click)="restar()">-</button>
         <button class="col-2 btn btn-dark m-1" (click)="multiplicar()">*</button>

@@ -1,0 +1,28 @@
+#calculator {
+
+    border: solid 1px #505050;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 10%;
+    
+}
+
+#screen{
+
+    border: solid 1px #505050;
+    border-radius: 15px 15px 0px 0px;
+    background-color: #ccc;
+    text-align: center;
+    align-items: center;
+}
+
+#screen>p{
+
+    margin-top: 5%;
+}
+
+#buttons{
+
+    border-radius: 0px 0px 15px 15px;
+    background-color: rgb(155, 155, 155);
+}
