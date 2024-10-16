@@ -35,6 +35,18 @@ export class TablaComponent {
   ]
 
   listadoAlumnos = new MatTableDataSource(ALUMNOS);
+
+  cambiarVista(columna: string) {
+
+    if(this.displayedColumns.includes(columna)){
+      
+      this.displayedColumns = this.displayedColumns.filter(col => col !== columna)
+    }
+    else {
+
+      this.displayedColumns.push(columna);
+    }
+  }
   
 
 }

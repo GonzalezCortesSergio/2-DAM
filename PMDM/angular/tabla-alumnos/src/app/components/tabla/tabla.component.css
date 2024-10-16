@@ -1,0 +1,16 @@
+section {
+
+    text-align: center;
+    margin-top: 2%;
+}
+div {
+
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.oculto {
+
+    display: none;
+}

@@ -1,3 +1,14 @@
+<section>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('nAlumno')">No. Alumno</mat-checkbox>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('nombre')">Nombre</mat-checkbox>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('apellidos')">Apellidos</mat-checkbox>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('nif')">NIF</mat-checkbox>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('edad')">Edad</mat-checkbox>
+  <mat-checkbox [checked]="true" (change)="cambiarVista('curso')">Curso</mat-checkbox>
+
+</section>
+
+<div>
 <table mat-table [dataSource]="listadoAlumnos">
 
     <ng-container matColumnDef="nAlumno">
@@ -40,3 +51,4 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>
