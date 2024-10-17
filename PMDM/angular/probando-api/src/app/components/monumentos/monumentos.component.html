@@ -1,0 +1,32 @@
+<table class="table table-stripped w-75 mx-auto">
+
+    <thead>
+        <th>ID</th>
+        <th>Código del País</th>
+        <th>Nombre del País</th>
+        <th>Nombre de la ciudad</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Nombre del monumento</th>
+        <th>Descripción</th>
+        <th>Imagen</th>
+    </thead>
+    <tbody>
+        @for (monumento of listaMonumentos; track $index) {
+
+            <tr>
+                <td>
+                    {{monumento.id}}
+                </td>
+                <td>{{monumento.codigoPais}}</td>
+                <td>{{monumento.nombrePais}}</td>
+                <td>{{monumento.nombreCiudad}}</td>
+                <td>{{monumento.latitud}}</td>
+                <td>{{monumento.longitud}}</td>
+                <td>{{monumento.nombreMonumento}}</td>
+                <td>{{monumento.descripcion}}</td>
+                <td><img [src]="monumento.photoUrl" class="w-100" /></td>
+            </tr>
+        }
+    </tbody>
+</table>

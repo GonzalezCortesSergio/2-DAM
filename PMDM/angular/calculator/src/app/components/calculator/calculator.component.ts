@@ -31,7 +31,7 @@ export class CalculatorComponent {
   }
 
   resultado() {
-    this.value = eval(this.calculichi);
+    this.value = (0,eval)(this.calculichi);
     this.calculichi = this.value.toString();
   }
 
