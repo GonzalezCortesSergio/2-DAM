@@ -7,20 +7,28 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomProgressBar2Component {
 
-  @Input() 
-  value = 0;
-
   @Input()
-  color = "primary";
+  valor = 0;
 
+  getProgressColor(): string {
 
-  getWidth() {
+    if(this.valor <= 25) {
+      
+      return 'danger';
+    }
+    else if (this.valor >= 25 && this.valor <= 50) {
 
-    return `width: ${this.value}%;`;
-  }
+      return 'warning';
+    }
 
-  getColor() {
+    else if (this.valor >= 50 && this.valor <= 75){
 
-    return `color: ${this.color};`
+      return 'primary';
+    }
+
+    else {
+
+      return 'success'
+    }
   }
 }
