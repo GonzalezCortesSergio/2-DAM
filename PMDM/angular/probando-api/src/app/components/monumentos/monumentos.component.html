@@ -28,5 +28,12 @@
                 <td><img [src]="monumento.photoUrl" class="w-100" /></td>
             </tr>
         }
+        @empty {
+            <tr>
+                <td colspan="9" class="text-center">
+                Illo no hay na
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

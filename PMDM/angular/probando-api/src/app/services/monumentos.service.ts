@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class MonumentosService {
 
-  API = "http://localhost:9000/api/monumentos"
+  API_URL = "http://localhost:9000/api/monumentos"
   constructor(private httpClient: HttpClient) { }
 
   getMonumentos() {
 
-    return this.httpClient.get(this.API).pipe(res => res);
+    return this.httpClient.get(this.API_URL).pipe(res => res);
 
   }
 }
