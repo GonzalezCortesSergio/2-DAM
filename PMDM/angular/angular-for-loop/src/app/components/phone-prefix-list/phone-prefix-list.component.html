@@ -1,0 +1,44 @@
+
+<div class="container-fluid mt-5 w-50">
+
+    <div class="row">
+
+        <div class="col-12">
+            <table class="table table-stripped">
+                <thead>
+                    <th>Country</th>
+                    <th>Phone prefix</th>
+                </thead>
+                <tbody>
+
+                    @for (country of countryPhones; track country.nombre) {
+
+
+                        <tr>
+
+                            <td><span [class]="getFlagImage(country.flag)"></span></td> 
+                        
+                            <td>
+                                @for (prefix of country.prefix; track prefix) {
+
+                                    +({{prefix}})&nbsp;
+                                }
+                                @empty {
+                                    <span class="badge badge-danger">No hay prefijos en la lista</span>
+                                }
+                            </td>
+                        </tr>
+
+                        
+                    }
+                    @empty {
+
+                        <tr>
+                            <td colspan="2">No se encontraron países en la lista</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
