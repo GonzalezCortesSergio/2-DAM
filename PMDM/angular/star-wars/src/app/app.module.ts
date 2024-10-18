@@ -10,12 +10,13 @@ import { provideHttpClient } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    VehiclesListComponent
+    VehiclesListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    
   ],
   providers: [
     provideClientHydration(),

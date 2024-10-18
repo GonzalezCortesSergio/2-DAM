@@ -1,1 +1,17 @@
-<p>vehicles-list works!</p>
+
+<div class="row w-50 mx-auto mt-5">
+
+    @for (vehicle of vehiclesList; track $index) {
+    
+        <div class="col-3 mt-5">
+            <div class="card">
+                <img class="card-img-top" [src]="getImage(vehicle)" onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg' " alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">{{vehicle.name}}</h4>
+                    <p class="card-text">Model - {{vehicle.model}}</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+        </div>
+}
+</div>

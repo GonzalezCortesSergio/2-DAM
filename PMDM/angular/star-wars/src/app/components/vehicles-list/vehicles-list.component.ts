@@ -28,9 +28,12 @@ export class VehiclesListComponent implements OnInit{
 
     this.getVehicles()
 
-    for (let vehiculo of this.vehiclesList) {
+  }
 
-      console.log(vehiculo.name)
-    }
+  getImage(vehicle: Vehicle):string {
+
+    let id = parseInt(vehicle.url.slice(31,32));
+
+    return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`
   }
 }
