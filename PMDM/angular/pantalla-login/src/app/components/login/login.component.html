@@ -1,0 +1,47 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="content">
+
+    <form class="formulario">
+
+        <h1>Inicio de sesión</h1>
+
+        <mat-form-field>
+
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+
+            <input matInput [type]="hide() ? 'password' : 'text'" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+            <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()">
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        </mat-form-field>
+
+    </form>
+    <div style="text-align: center;">
+        <button mat-raised-button (click)="mostrarDatos($event)">Iniciar sesión</button>
+    </div>
+  </div>
