@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ModalVehcileComponent } from './components/modal-vehcile/modal-vehcile.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { ModalVehcileComponent } from './components/modal-vehcile/modal-vehcile.
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient()
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
