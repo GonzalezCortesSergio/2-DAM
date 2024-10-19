@@ -1,0 +1,18 @@
+    <div>
+        <img [src]="getImage(vehicle)" onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg'" class="w-100"/>
+    </div>
+    <div>
+        <div class="mx-auto mt-5 w-75">
+
+            <h1 class="h4">{{vehicle.name}}</h1>
+            <p class="text-black-50">Model: {{vehicle.model}}</p>
+            <p class="text-black-50">Manufacturer: {{vehicle.manufacturer}}</p>
+            <p class="text-black-50">Class: {{vehicle.vehicle_class}}</p>
+            <p class="text-black-50">Cost: {{vehicle.cost_in_credits}} credits</p>
+            <p class="text-black-50">Speed: {{vehicle.max_atmosphering_speed}}km/h</p>
+            <p class="text-black-50">Lenght: {{vehicle.length}}m</p>
+            <p class="text-black-50">Cargo Capacity: {{vehicle.cargo_capacity}} metric tons</p>
+            <p class="text-black-50">Minimum Crew: {{vehicle.crew}}</p>
+            <p class="text-black-50">Passengers: {{vehicle.passengers}}</p>
+        </div>
+    </div>

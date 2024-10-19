@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Vehicle } from '../../interfaces/vehicle';
 import { VehiclesService } from '../../services/vehicles.service';
 import { Result } from '../../interfaces/result';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalVehcileComponent } from '../modal-vehcile/modal-vehcile.component';
 
 @Component({
   selector: 'app-vehicles-list',
@@ -9,6 +11,8 @@ import { Result } from '../../interfaces/result';
   styleUrl: './vehicles-list.component.css'
 })
 export class VehiclesListComponent implements OnInit{
+
+  private modalService = inject(NgbModal);
 
   constructor(private vehicleService: VehiclesService) {}
 
@@ -35,5 +39,11 @@ export class VehiclesListComponent implements OnInit{
     let id = parseInt(vehicle.url.slice(31,32));
 
     return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`
+  }
+
+  open(vehicle: Vehicle) {
+
+    const modalRef = this.modalService.open(ModalVehcileComponent);
+    modalRef.componentInstance.vehicle = vehicle;
   }
 }
