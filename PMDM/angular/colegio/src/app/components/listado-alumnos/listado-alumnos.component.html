@@ -1,0 +1,34 @@
+<table class="table table-stripped w-50 mx-auto text-center">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre completo</th>
+            <th>Edad a 31 de Diciembre</th>
+            <th>Asignaturas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (alumno of listadoAlumnos; track $index) {
+
+            <tr>
+                <td>
+                    {{alumno.id}}
+                </td>
+                <td>
+                    {{alumno.nombreCompleto}}
+                </td>
+                <td>
+                    {{alumno.edadA31Diciembre}}
+                </td>
+                <td>
+                    @for (asignatura of alumno.asignaturas; track $index) {
+                        <p>
+                            {{asignatura}}
+                        </p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

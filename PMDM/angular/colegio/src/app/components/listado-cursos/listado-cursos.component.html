@@ -1,0 +1,49 @@
+<table class="table table-stripped w-50 mx-auto text-center">
+
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>
+                Horas totales
+            </th>
+            <th>
+                Asignaturas
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (curso of listaCursos; track $index) {
+
+            <tr>
+                <td>
+                    {{curso.id}}
+                </td>
+                <td>
+                    {{curso.nombre}}
+                </td>
+                <td>
+                    {{curso.tipo}}
+                </td>
+                <td>
+                    {{curso.horasTotales}}
+                </td>
+                <td>
+                    @for (asignatura of curso.asignaturas; track $index) {
+                        <p>ID: {{asignatura.id}}</p>
+                        <p>Nombre: {{asignatura.nombre}}</p>
+                        <p>Número de horas: {{asignatura.numHoras}}</p>
+                        <p>Cantidad de alumnos: {{asignatura.cantidadAlumnos}}</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
