@@ -1,0 +1,24 @@
+.card{
+
+    background-color: #3c3e44;
+}
+img {
+
+    border-radius: 5px 0px 0px 5px;
+}
+
+.alive {
+
+    background-color: green;
+    border-radius: 500px;
+    height: 15px;
+    width: 15px;
+}
+
+.dead{
+
+    background-color: red;
+    border-radius: 150px;
+    height: 15px;
+    width: 15px;
+}
