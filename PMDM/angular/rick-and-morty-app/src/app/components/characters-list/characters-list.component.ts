@@ -33,7 +33,10 @@ export class CharactersListComponent implements OnInit{
 
       return "alive";
     }
-    return "dead";
+    if(_t2.status == "Dead"){
+      return "dead";
+    }
+    return "unknown"
     
   }
 
