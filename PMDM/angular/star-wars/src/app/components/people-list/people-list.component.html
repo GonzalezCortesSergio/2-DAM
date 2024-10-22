@@ -1,0 +1,15 @@
+<div class="row w-50 mx-auto mt-5">
+
+    @for (character of peopleList; track $index) {
+    
+        <div class="col-3 mt-5">
+            <div class="card">
+                <img class="card-img-top" [src]="getImage(character)" onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg' " alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">{{character.name}}</h4>
+                    <a class="btn btn-primary" (click)="open(character)">Ver más</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

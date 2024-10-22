@@ -1,0 +1,17 @@
+<div class="mb-5">
+    <img [src]="getImage(character)" onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg'" class="w-100"/>
+</div>
+<div>
+    <div class="mx-auto w-75">
+
+        <h1 class="h4">{{character.name}}</h1>
+        <p class="text-black-50">Birth Year: {{character.birth_year}}BBY</p>
+        <p class="text-black-50">Species: Unknown</p>
+        <p class="text-black-50">Height: {{character.height}}cm</p>
+        <p class="text-black-50">Mass: {{character.mass}}kg</p>
+        <p class="text-black-50">Gender: {{character.gender}}</p>
+        <p class="text-black-50">Hair Color: {{character.hair_color}}</p>
+        <p class="text-black-50">Skin Color: {{character.skin_color}}</p>
+        <p class="text-black-50">Homeworld: {{character.homeworld}}</p>
+    </div>
+</div>
