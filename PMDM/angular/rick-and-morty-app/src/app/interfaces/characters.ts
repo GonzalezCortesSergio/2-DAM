@@ -22,7 +22,8 @@ export interface CharactersResponsible {
     image: string
     episode: string[]
     url: string
-    created: string
+    created: string,
+    firstEpisode: string
   }
   
   export interface Origin {

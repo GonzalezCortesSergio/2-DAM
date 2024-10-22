@@ -25,6 +25,7 @@ export class CharactersListComponent implements OnInit{
   ngOnInit(): void {
     
     this.getCharacterList();
+    this.getEpisodeName();
   }
 
   getColorichi(_t2: Character) {
@@ -40,11 +41,14 @@ export class CharactersListComponent implements OnInit{
     
   }
 
-  getEpisodeName(episode: string) {
+  getEpisodeName() {
 
-    this.service.getFirstEpisode(episode).subscribe(res => {
+    this.charactersList.forEach((character, index) => {
 
-      return res.name;
+      this.service.getFirstEpisode(character.episode[0]).subscribe(res => {
+
+        character.firstEpisode = res.name;
+      })
     })
   }
 }
