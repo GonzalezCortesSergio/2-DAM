@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3 mt-5">
+            @if(pokemonBattle.length <= 2){
+
+                <h5>Pokemon seleccionados:</h5>
+                <p>
+                    @for (pokemon of pokemonBattle; track $index) {
+                        {{pokemon.name}}
+                    }
+                </p>
+            }
+            @else if (pokemonBattle.length > 2) {
+
+                <h5 class="bg-warning py-2 text-center">No puede agregar más de dos pokemon a la batalla</h5>
+            }
+        </div>
+        @if(pokemonBattle.length == 2) {
+            <div class="col-3 mt-5">
+                <a [routerLink]="['/battle', pokemonBattle[0].id, pokemonBattle[1].id]" class="btn btn-danger">¡¡A la batalla!!</a>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @for (pokemon of listadoPokemon; track $index) {
+
+            <div class="col-2 mt-5">
+                <app-pokemon [pokemon]="pokemon"
+                (pokemonChecked)="addToBattle($event)"></app-pokemon>
+            </div>
+        }
+    </div>
+</div>

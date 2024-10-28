@@ -12,15 +12,10 @@ export class PokemonComponent {
   @Input()
   pokemon: Pokemon | undefined;
   @Output()
-  atacar = new EventEmitter<Atacar>();
+  pokemonChecked = new EventEmitter<Pokemon>();
 
-  attack(pokemon: Pokemon | undefined) {
+  onCheck(pokemon: Pokemon | undefined) {
 
-    let atacar: Atacar = {
-      pokemonId: pokemon?.id,
-      danio: 2
-    };
-    
-    this.atacar.emit(atacar);
+    this.pokemonChecked.emit(pokemon);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Atacar, Pokemon } from '../../models/pokemon.interface';
 import { PokemonService } from '../../services/pokemon.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-battle',
@@ -10,47 +11,48 @@ import { PokemonService } from '../../services/pokemon.service';
 export class PokemonBattleComponent implements OnInit{
 
   turno = false;
+  dmg = 0;
+  history: string[] = [];
 
-  attackPokemon($event: Atacar) {
-  this.pokemonBattle.forEach(pokemon => {
-    
-    if(pokemon.id != $event.pokemonId) {
+  pokemonId: string | null = "";
+  pokemonId2: string | null = "";
 
-      pokemon.stats[0].base_stat -=$event.danio;
-    }
-  })
-  
-}
+  pokemon1: Pokemon | undefined;
+  pokemon2: Pokemon | undefined;
 
-  listadoPokemon: Pokemon[] = [];
-  pokemonBattle: Pokemon[] = [];
-
-  constructor(private service: PokemonService) {}
+  constructor(private route: ActivatedRoute, private service: PokemonService) {}
 
   ngOnInit(): void {
-      
-    this.getPokemonList();
-    console.log(this.listadoPokemon);
-    this.listadoPokemon.forEach(pokemon =>{
+      this.pokemonId = this.route.snapshot.paramMap.get('id');
+      this.pokemonId2 = this.route.snapshot.paramMap.get('id2');
 
-      if(pokemon.id == 1 || pokemon.id == 4){
+      this.service.getOnePokemon(parseInt(this.pokemonId!)).subscribe(res => {
 
-        this.pokemonBattle.push(pokemon);
-      }
-    })
-
-  }
-
-  getPokemonList(): void{
-    this.service.getPokemonResponse().subscribe(response => {
-
-      response.results.forEach(pokemonPreview => {
-
-        this.service.getPokemon(pokemonPreview.url).subscribe(pokemon=> {
-
-          this.listadoPokemon.push(pokemon);
-        })
+        this.pokemon1 = res;
       })
-    })
+      this.service.getOnePokemon(parseInt(this.pokemonId2!)).subscribe(res => {
+
+        this.pokemon2 = res;
+      })
   }
+  atacar() {
+    this.dmg = Math.floor(Math.random() * (20 - 1 + 1) + 1);
+    if(this.turno) {
+
+      this.pokemon2!.stats[0].base_stat-= this.dmg;
+      this.history.push(this.pokemon1!.name + " ha hecho " + this.dmg + " de daño");
+    }
+
+    else {
+
+      this.pokemon1!.stats[0].base_stat-= this.dmg;
+      this.history.push(this.pokemon2!.name + " ha hecho " + this.dmg + " de daño");
+    }
+    
+    this.turno = this.turno == true ? false: true;
+    
+
+  }
+
+  
 }

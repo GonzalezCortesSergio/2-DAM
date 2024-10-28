@@ -1,19 +1,54 @@
-<div class="container mx-auto">
-    <div class="row mt-5">
-        @for (pokemon of pokemonBattle; track $index) {
-            @if(pokemon.stats[0].base_stat > 0){
-                <div class="col-3">
-                    <app-pokemon [pokemon]="pokemon" (atacar)="attackPokemon($event)"></app-pokemon>
-                </div>
-            }
-            @else if(pokemon.stats[0].base_stat <= 0){
+<div class="m-4">
+<a routerLink="/pokemon-list"><i class="bi bi-arrow-left display-5 text-dark"></i></a>
+</div>
 
-                <div class="col-3 bg-danger align-items-center">
-                    <h2>You loose</h2>
+<div class="container mt-4 w-50 mx-auto">
+    <div class="row">
+        <div class="col">
+            @if(pokemon1!.stats[0].base_stat > 0){
+                <div class="card">
+                    <img [src]="pokemon1?.sprites?.front_default" [alt]="pokemon1?.name" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{pokemon1?.name}}</h5>
+                        <h5>HP: {{pokemon1!.stats[0].base_stat}}</h5>
+                    </div>
                 </div>
             }
-                
-                
-        }
+            @else {
+
+                <div class="card bg-danger">
+                    <h5 class="text-center">You loose</h5>
+                </div>
+            }
+        </div>
+        <div class="col">
+            @if(pokemon2!.stats[0].base_stat > 0){
+                <div class="card">
+                    <img [src]="pokemon2?.sprites?.front_default" [alt]="pokemon2?.name" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{pokemon2?.name}}</h5>
+                        <h5>HP: {{pokemon2!.stats[0].base_stat}}</h5>
+                    </div>
+                </div>
+            }
+            @else {
+
+                <div class="card bg-danger">
+                    <h5 class="text-center">You loose</h5>
+                </div>
+            }
+        </div>
     </div>
+</div>
+<div class="text-center mt-3">
+    @if(pokemon2!.stats[0].base_stat > 0 && pokemon1!.stats[0].base_stat > 0){
+    <button class="btn btn-danger" (click)="atacar()">
+        Atacar
+    </button>
+    }
+    @for (text of history; track $index) {
+       <p> 
+        {{text}}
+        </p>
+    }
 </div>
