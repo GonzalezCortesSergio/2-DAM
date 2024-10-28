@@ -1,0 +1,10 @@
+<div class="card">
+    <img [src]="pokemon?.sprites?.front_default" [alt]="pokemon?.name" class="card-img-top" />
+    <div class="card-body">
+        <h5 class="card-title">{{pokemon?.name}}</h5>
+        <h5>{{pokemon!.stats[0].base_stat}}</h5>
+        <p class="card-text">
+            <button class="btn btn-danger" (click)="attack(pokemon)">Atacar</button>
+        </p>
+    </div>
+</div>

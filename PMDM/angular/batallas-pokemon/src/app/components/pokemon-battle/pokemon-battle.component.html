@@ -1,0 +1,19 @@
+<div class="container mx-auto">
+    <div class="row mt-5">
+        @for (pokemon of pokemonBattle; track $index) {
+            @if(pokemon.stats[0].base_stat > 0){
+                <div class="col-3">
+                    <app-pokemon [pokemon]="pokemon" (atacar)="attackPokemon($event)"></app-pokemon>
+                </div>
+            }
+            @else if(pokemon.stats[0].base_stat <= 0){
+
+                <div class="col-3 bg-danger align-items-center">
+                    <h2>You loose</h2>
+                </div>
+            }
+                
+                
+        }
+    </div>
+</div>
