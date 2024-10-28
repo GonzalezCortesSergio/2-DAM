@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row mb-3">
+        @if(peliculasSelected.length > 0){
+        <div class="col-3">
+            <select class="form-control">
+                <option value="">-- Select option</option>
+                <option value="1">Sábado tarde</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-info">+ Add</button>
+        </div>
+    }
+        <div class="col-3">
+            {{peliculasSelected.length}} selected
+        </div>
+    
+    </div>
+
+
+    <div class="row">
+        @for(pelicula of listadoPeliculas; track pelicula.episode_id) {
+
+            <div class="col-3">
+
+                <app-film-detail [film]="pelicula" (filmChecked)="newElementSelected($event)"></app-film-detail> 
+            </div>
+        }
+    </div>
+</div>

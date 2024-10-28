@@ -1,0 +1,11 @@
+
+<div class="card">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{film?.title}}</h5>
+      <p class="card-text"><input type="checkbox" [id]="film?.episode_id" (click)="filmClicked(film)"/>
+        <label [for]="film?.episode_id" >Select</label>    
+    </p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
