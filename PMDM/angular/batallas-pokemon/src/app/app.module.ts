@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { LottieComponent, LottieDirective, provideLottieOptions } from 'ngx-lottie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,11 +19,16 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    LottieComponent,
+    LottieDirective
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient()
+    provideHttpClient(),
+    provideLottieOptions({
+      player: () => import('lottie-web')
+    })
   ],
   bootstrap: [AppComponent]
 })
