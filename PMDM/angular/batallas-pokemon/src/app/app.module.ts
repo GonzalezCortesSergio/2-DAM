@@ -8,6 +8,7 @@ import { PokemonBattleComponent } from './components/pokemon-battle/pokemon-batt
 import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { provideHttpClient } from '@angular/common/http';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
+import { PokemonImgPipe } from './pipes/pokemon-img.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
     PokemonBattleComponent,
     PokemonComponent,
     PokemonListComponent,
+    PokemonImgPipe,
   ],
   imports: [
     BrowserModule,
