@@ -1,0 +1,75 @@
+<div class="w-50 mx-auto">
+
+    <h1 class="display-5 py-3 text-center">Registro</h1>
+    <form class="mt-5 mx-auto" #usuarioForm="ngForm">
+        <div class="d-flex">
+            <div class="mb-3 input-group mx-3">
+                <label for="nombre" class="input-group-text">Nombre <span class="text-danger">&nbsp;*</span></label>
+                <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="usuario.nombre" required/>
+            </div>
+            <div class="mb-3 input-group mx-3">
+                <label for="apellidos" class="input-group-text">Apellidos <span class="text-danger">&nbsp;*</span></label>
+                <input type="text" id="apellidos" name="apellidos" class="form-control" [(ngModel)]="usuario.apellidos" required/>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="mb-3 input-group mx-3">
+                <label for="nif" class="input-group-text">NIF (sin letra)<span class="text-danger">&nbsp;*</span></label>
+                <input type="text" id="nif" name="nif" class="form-control" [(ngModel)]="usuario.nif" required/>
+                <span class="input-group-text">{{calcularLetra(usuario.nif)}}</span>
+            </div>
+            <div class="mb-3 input-group mx-3">
+                <label for="email" class="input-group-text">Email <span class="text-danger">&nbsp; *</span></label>
+                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="usuario.email" required/>
+            </div>
+        </div>
+        <div class="mb-3 input-group w-75 mx-auto">
+            <label for="tel" class="input-group-text">Teléfono <span class="text-danger">&nbsp; *</span></label>
+            <input type="text" id="tel" name="tel" class="form-control" [(ngModel)]="usuario.tel" required/>
+        </div>
+        <div class="d-flex">
+            <div class="mb-3 input-group mx-3">
+                <label for="sexo" class="input-group-text">Sexo <span class="text-danger">&nbsp; *</span></label>
+                <select class="form-control" id="sexo" name="sexo" [(ngModel)]="usuario.sexo" required>
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                </select>
+            </div>
+            <div class="mb-3 input-group mx-3">
+                <label for="pagina" class="input-group-text">Cómo conoció esta página <span class="text-danger">&nbsp; *</span></label>
+                <select class="form-control" id="pagina" name="pagina" [(ngModel)]="usuario.conocimientoPagina" required>
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="Buscando en Google">Buscando en Google</option>
+                    <option value="A través de un amigo">A través de un amigo</option>
+                    <option value="Por mi profesor">Por mi profesor</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="mb-3 input-group mx-3" [formGroup]="passwordForm">
+                <label for="password" class="input-group-text">Contraseña <span class="text-danger">&nbsp; *</span></label>
+                <input formControlName="password" type="password" name="password" id="password" class="form-control" [(ngModel)]="usuario.contrasena" required/>
+            </div>
+            <div class="mb-3 input-group mx-3" [formGroup]="passwordForm">
+                <label for="confirmPassword" class="input-group-text">Confirmar contraseña <span class="text-danger">&nbsp; *</span></label>
+                <input formControlName="confirmPassword" type="password" name="confirmPassword" id="confirmPassword" class="form-control" required/>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!usuarioForm.form.valid || !passwordForm.valid" (click)="enviar()">Enviar</button>
+        </div>
+        
+    </form>
+    @if (!usuarioForm.form.valid) {
+        <div class="alert alert-danger mx-auto" role="alert">
+            Faltan campos por rellenar
+        </div>
+    }
+    @if(!passwordForm.valid && usuario.contrasena != ''){
+        <div class="alert alert-danger mx-auto" role="alert">
+            Los campos de contraseña y confirmar contraseña no coinciden
+        </div>
+    }
+</div>
