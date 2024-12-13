@@ -8,7 +8,6 @@ import com.salesianostriana.dam.ejemplo_dto.producto.Categoria;
 import com.salesianostriana.dam.ejemplo_dto.producto.Producto;
 import com.salesianostriana.dam.ejemplo_dto.producto.ProductoDTO;
 import jakarta.annotation.PostConstruct;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

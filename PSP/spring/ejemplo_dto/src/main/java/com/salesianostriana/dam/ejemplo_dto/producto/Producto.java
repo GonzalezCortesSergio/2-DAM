@@ -18,6 +18,7 @@ public class Producto {
     private String nombre;
     private String desc;
     private double pvp;
+    @Builder.Default
     private List<String> imagenes = new ArrayList<>();
     private Categoria categoria;
 }
