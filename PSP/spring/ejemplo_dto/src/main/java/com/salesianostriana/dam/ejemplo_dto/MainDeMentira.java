@@ -25,7 +25,7 @@ public class MainDeMentira {
 
         System.out.println("ALUMNO: ");
         System.out.println();
-        
+
         System.out.println(AlumnoDTO.of(alumno));
         System.out.println();
 
