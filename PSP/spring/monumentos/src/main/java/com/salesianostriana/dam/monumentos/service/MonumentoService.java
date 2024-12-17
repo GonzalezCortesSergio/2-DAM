@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.monumentos.service;
 
+import com.salesianostriana.dam.monumentos.error.MonumentoNoEncontradoException;
 import com.salesianostriana.dam.monumentos.model.Monumento;
 import com.salesianostriana.dam.monumentos.repository.MonumentoRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,15 @@ public class MonumentoService {
        else if (orden.equalsIgnoreCase("desc"))
            return repository.findAllDesc();
 
+       else if (repository.findAll().isEmpty())
+           throw new MonumentoNoEncontradoException("No se han encontrado monumentos");
+
        return repository.findAll();
     }
 
-    public Optional<Monumento> findById(Long id) {
+    public Monumento findById(Long id) {
 
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(() -> new MonumentoNoEncontradoException(id));
     }
 
     public Monumento save(Monumento monumento) {
@@ -35,7 +39,7 @@ public class MonumentoService {
         return repository.save(monumento);
     }
 
-    public Optional<Monumento> edit(Long id, Monumento monumento) {
+    public Monumento edit(Long id, Monumento monumento) {
 
         Optional<Monumento> optionalMonumento = repository.findById(id);
 
@@ -49,7 +53,7 @@ public class MonumentoService {
             m.setNombrePais(monumento.getNombrePais());
             m.setPhotoUrl(monumento.getPhotoUrl());
             return m;
-        });
+        }).orElseThrow(() -> new MonumentoNoEncontradoException(id));
     }
 
     public void delete(Monumento monumento) {
