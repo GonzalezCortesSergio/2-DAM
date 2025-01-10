@@ -3,8 +3,6 @@ package com.salesianostriana.dam.data;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
-
 import java.util.Objects;
 
 @Entity
