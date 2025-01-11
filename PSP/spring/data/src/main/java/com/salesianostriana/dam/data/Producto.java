@@ -19,8 +19,14 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nombre;
-    private double precio;
+    @Column(length = 512)
+    private String nombreProducto;
+
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+
+    @Column(name = "precio")
+    private double precioVenta;
 
     @Override
     public final boolean equals(Object o) {
