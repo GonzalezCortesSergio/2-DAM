@@ -3,7 +3,6 @@ package com.salesianostriana.dam.data.controller;
 import com.salesianostriana.dam.data.dto.EditProductoCmd;
 import com.salesianostriana.dam.data.dto.GetProductoDto;
 import com.salesianostriana.dam.data.service.ProductoService;
-import com.salesianostriana.dam.data.model.Producto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +51,17 @@ public class ProductoController {
         productoService.delete(id);
 
         return ResponseEntity.noContent().build();
-     }
+    }
+
+    @PutMapping("/addCategoria/{idProducto}/{idCategoriaNueva}")
+    public GetProductoDto addCategoria(@PathVariable Long idProducto, @PathVariable Long idCategoriaNueva) {
+
+        return GetProductoDto.of(productoService.addToCategoria(idProducto, idCategoriaNueva));
+    }
+
+    @PutMapping("/deleteCategoria/{idProducto}/{idCategoriaABorrar}")
+    public GetProductoDto deleteCategoria(@PathVariable Long idProducto, @PathVariable Long idCategoriaABorrar) {
+
+        return GetProductoDto.of(productoService.removeFromCategoria(idProducto, idCategoriaABorrar));
+    }
 }

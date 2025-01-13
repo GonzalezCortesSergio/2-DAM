@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.data.service;
 
 import com.salesianostriana.dam.data.model.Categoria;
+import com.salesianostriana.dam.data.model.Producto;
 import com.salesianostriana.dam.data.repo.CategoriaRepository;
+import com.salesianostriana.dam.data.repo.ProductoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,6 @@ import java.util.List;
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
-
 
     public List<Categoria> findAll() {
 
