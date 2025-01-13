@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.data;
+package com.salesianostriana.dam.data.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @Column(length = 512)
@@ -27,6 +27,11 @@ public class Producto {
 
     @Column(name = "precio")
     private double precioVenta;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id",
+            foreignKey = @ForeignKey(name = "fk_producto_categoria"))
+    private Categoria categoria;
 
     @Override
     public final boolean equals(Object o) {
