@@ -32,9 +32,9 @@ public class CategoriaService {
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado una categoría con el ID: %d".formatted(id)));
     }
 
-    public Categoria save(Categoria categoria) {
+    public Categoria save(String categoria) {
 
-        return categoriaRepository.save(categoria);
+        return categoriaRepository.save(Categoria.builder().nombre(categoria).build());
     }
 
     public Categoria edit(Categoria categoria, Long id) {
