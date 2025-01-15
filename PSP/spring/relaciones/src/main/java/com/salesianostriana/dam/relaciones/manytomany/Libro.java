@@ -6,9 +6,7 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -37,7 +35,7 @@ public class Libro {
             joinColumns = @JoinColumn(name = "libro", foreignKey = @ForeignKey(name = "fk_libro_autor")),
             inverseJoinColumns = @JoinColumn(name = "autor", foreignKey = @ForeignKey(name = "fk_autor_libro"))
     )
-    private List<Autor> autores = new ArrayList<>();
+    private Set<Autor> autores = new HashSet<>();
 
     public void addAutor(Autor autor) {
 

@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -26,7 +24,7 @@ public class Autor {
     @ToString.Exclude
     @Builder.Default
     @ManyToMany(mappedBy = "autores")
-    private List<Libro> libros = new ArrayList<>();
+    private Set<Libro> libros = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
