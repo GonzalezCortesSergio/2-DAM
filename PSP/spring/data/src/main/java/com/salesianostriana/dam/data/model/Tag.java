@@ -1,30 +1,33 @@
-package com.salesianostriana.dam.relaciones.manytomany;
+package com.salesianostriana.dam.data.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Autor {
+@Entity
+@ToString
+public class Tag {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String nombre, apellidos;
+    private String nombre;
 
-    @ToString.Exclude
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     @Builder.Default
-    @ManyToMany(mappedBy = "autores")
-    private Set<Libro> libros = new HashSet<>();
+    @Setter(AccessLevel.NONE)
+    @ToString.Exclude
+    private Set<Producto> productos = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
@@ -33,8 +36,8 @@ public class Autor {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Autor autor = (Autor) o;
-        return getId() != null && Objects.equals(getId(), autor.getId());
+        Tag tag = (Tag) o;
+        return getId() != null && Objects.equals(getId(), tag.getId());
     }
 
     @Override
