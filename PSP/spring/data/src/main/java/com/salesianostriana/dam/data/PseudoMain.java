@@ -16,7 +16,7 @@ public class PseudoMain {
 
     @PostConstruct
     public void init() {
-        
+
         repository.findAll().forEach(System.out::println);
 
     }
