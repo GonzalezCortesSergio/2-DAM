@@ -28,4 +28,9 @@ public class ProfesorService {
 
         return profesorRepository.save(profesor);
     }
+
+    public void delete(Long id) {
+
+        profesorRepository.deleteById(id);
+    }
 }

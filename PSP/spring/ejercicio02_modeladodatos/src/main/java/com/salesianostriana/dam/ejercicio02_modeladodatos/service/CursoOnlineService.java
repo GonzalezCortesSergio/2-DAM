@@ -28,4 +28,9 @@ public class CursoOnlineService {
 
         return cursoOnlineRepository.save(cursoOnline);
     }
+
+    public void delete (Long id) {
+
+        cursoOnlineRepository.deleteById(id);
+    }
 }
