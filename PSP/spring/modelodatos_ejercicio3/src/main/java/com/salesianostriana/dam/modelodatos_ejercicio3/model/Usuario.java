@@ -1,12 +1,11 @@
 package com.salesianostriana.dam.modelodatos_ejercicio3.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +30,27 @@ public class Usuario {
     private String pin;
 
     private double saldo;
+
+    @Builder.Default
+    @OneToMany(
+            mappedBy = "usuario",
+            fetch = FetchType.EAGER
+    )
+    private List<Uso> listaUsos = new ArrayList<>();
+
+    //HELPER
+
+    public void addUso(Uso uso) {
+
+        uso.setUsuario(this);
+        this.listaUsos.add(uso);
+    }
+
+    public void removeUso(Uso uso) {
+
+        this.listaUsos.remove(uso);
+        uso.setUsuario(null);
+    }
 
 
     @Override
