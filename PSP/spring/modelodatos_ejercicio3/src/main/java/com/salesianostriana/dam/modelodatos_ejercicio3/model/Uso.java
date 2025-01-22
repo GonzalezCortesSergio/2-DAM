@@ -43,6 +43,8 @@ public class Uso {
     @ManyToOne
     private Estacion estacion;
 
+    private boolean terminado;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

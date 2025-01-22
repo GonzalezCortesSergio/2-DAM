@@ -35,10 +35,8 @@ public class Estacion {
 
     //HELPER
 
-    public void addBicicleta(Bicicleta bicicleta) throws Exception{
+    public void addBicicleta(Bicicleta bicicleta) throws RuntimeException{
 
-        if(listaBicicletas.size() > capacidad)
-            throw new Exception();
         bicicleta.setEstacion(this);
         this.listaBicicletas.add(bicicleta);
     }
