@@ -1,7 +1,7 @@
 import re
 from unicodedata import normalize
 
-def transformar_texto(texto: str):
+def transformar_texto_morse(texto: str):
 
     texto_nuevo = []
 
@@ -66,3 +66,58 @@ def transformar_texto(texto: str):
 
 
 
+def transformar_morse_texto(morse: str):
+
+    texto_nuevo = []
+
+
+    abecedario_morse = {
+        ".-": "A",
+        "-...": "B",
+        "-.-.": "C",
+        "-..": "D",
+        ".": "E",
+        "..-.": "F",
+        "--.": "G",
+        "....": "H",
+        "..": "I",
+        ".---": "J",
+        "-.-": "K",
+        ".-..": "L",
+        "--": "M",
+        "-.": "N",
+        "---": "O",
+        ".--.": "P",
+        "--.-": "Q",
+        ".-.": "R",
+        "...": "S",
+        "-": "T",
+        "..-": "U",
+        "...-": "V",
+        ".--": "W",
+        "-..-": "X",
+        "-.--": "Y",
+        "--..": "Z",
+        ".----": "1",
+        "..---": "2",
+        "...--": "3",
+        "....-": "4",
+        ".....": "5",
+        "-....": "6",
+        "--...": "7",
+        "---..": "8",
+        "----.": "9",
+        "-----": "0",
+        "  ": " "
+    }
+
+    morse = morse.split(" ")
+
+    for letra in morse:
+
+        texto_nuevo.append(abecedario_morse[letra])
+
+    
+    texto_nuevo = " ".join(texto_nuevo)
+
+    return texto_nuevo

@@ -1,6 +1,6 @@
-package com.salesianostriana.dam.herencia.model.mappedsuperclass;
+package com.salesianostriana.dam.herencia.model.joined;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.proxy.HibernateProxy;
@@ -8,16 +8,19 @@ import org.hibernate.proxy.HibernateProxy;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @Getter
 @Setter
-@ToString(callSuper = true)
-public class Moto extends Vehiculo{
+@ToString
+public class Animal {
 
-    private int cilindrada;
-
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String especie;
 
     @Override
     public final boolean equals(Object o) {
@@ -26,8 +29,8 @@ public class Moto extends Vehiculo{
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Moto moto = (Moto) o;
-        return getId() != null && Objects.equals(getId(), moto.getId());
+        Animal animal = (Animal) o;
+        return getId() != null && Objects.equals(getId(), animal.getId());
     }
 
     @Override
