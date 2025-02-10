@@ -1,0 +1,11 @@
+{
+    "nombre": "Sergio",
+    "apellido": "Gonz\u00e1lez",
+    "edad": 19,
+    "lenguajes": [
+        "Python",
+        "Java",
+        "Kotlin",
+        "JavaScrtipt"
+    ]
+}
