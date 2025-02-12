@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.ejemplo_jwt.security;
 
-import com.salesianostriana.dam.ejemplo_jwt.security.jwt.JwtFilter;
+import com.salesianostriana.dam.ejemplo_jwt.security.jwt.access.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +15,8 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,8 +26,6 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
-    private final AuthenticationEntryPoint authEntryPoint;
-    private final AccessDeniedHandler accessDeniedHandler;
     private final JwtFilter authFilter;
 
 
@@ -61,16 +58,16 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.exceptionHandling(csrf -> csrf.authenticationEntryPoint(authEntryPoint)
-                .accessDeniedHandler(accessDeniedHandler));
-        http.sessionManagement(csrf -> csrf
+        http.sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken").permitAll()
                 .requestMatchers("/note/**").hasRole("USER")
                 .requestMatchers("/auth/register/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .requestMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken").permitAll());
+                .anyRequest().authenticated());
+
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 

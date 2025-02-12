@@ -1,13 +1,11 @@
-package com.salesianostriana.dam.ejemplo_jwt.security.jwt;
+package com.salesianostriana.dam.ejemplo_jwt.security.jwt.access;
 
 import com.salesianostriana.dam.ejemplo_jwt.security.error.JwtTokenException;
 import com.salesianostriana.dam.ejemplo_jwt.user.model.Usuario;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
-@Log
 @Service
 public class JwtProvider {
 
@@ -30,7 +27,7 @@ public class JwtProvider {
     private String jwtSecret;
 
     @Value("${app.security.jwt.duration}")
-    private Long jwtLifeInHours;
+    private Long jwtLifeInMinutes;
 
     private JwtParser parser;
 
@@ -40,8 +37,8 @@ public class JwtProvider {
     @PostConstruct
     public void init() {
 
-        byte[] result = Decoders.BASE64.decode(jwtSecret);
-        secretKey = Keys.hmacShaKeyFor(result);
+
+        secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
 
         parser = Jwts.parser()
                 .verifyWith(secretKey)
@@ -62,14 +59,13 @@ public class JwtProvider {
                 Date.from(
                         LocalDateTime
                                 .now()
-                                .plusHours(jwtLifeInHours)
+                                .plusMinutes(jwtLifeInMinutes)
                                 .atZone(ZoneId.systemDefault())
                                 .toInstant()
                 );
 
         return Jwts.builder()
-                .header()
-                .add("typ", TOKEN_TYPE)
+                .header().type(TOKEN_TYPE)
                 .and()
                 .subject(usuario.getId().toString())
                 .issuedAt(new Date())
@@ -91,8 +87,6 @@ public class JwtProvider {
             parser.parseSignedClaims(token);
             return true;
         }catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
-
-            log.info("Error con el token: %s".formatted(ex.getMessage()));
             throw new JwtTokenException(ex.getMessage());
         }
     }

@@ -3,6 +3,7 @@ package com.salesianostriana.dam.ejemplo_jwt.user.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,14 +20,14 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Builder
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "user_entity")
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "uuid")
+    @GeneratedValue
     private UUID id;
 
+    @NaturalId
     @Column(unique = true, updatable = false)
     private String username;
 
@@ -64,7 +65,7 @@ public class Usuario implements UserDetails {
         return roles.stream()
                 .map(role -> "ROLE_" + role)
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

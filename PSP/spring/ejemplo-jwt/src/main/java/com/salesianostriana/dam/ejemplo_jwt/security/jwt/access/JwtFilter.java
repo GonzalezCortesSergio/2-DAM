@@ -1,14 +1,13 @@
-package com.salesianostriana.dam.ejemplo_jwt.security.jwt;
+package com.salesianostriana.dam.ejemplo_jwt.security.jwt.access;
 
 import com.salesianostriana.dam.ejemplo_jwt.security.error.JwtTokenException;
 import com.salesianostriana.dam.ejemplo_jwt.user.model.Usuario;
-import com.salesianostriana.dam.ejemplo_jwt.user.service.UsuarioService;
+import com.salesianostriana.dam.ejemplo_jwt.user.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,14 +19,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
-@Log
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioRepository;
     private final JwtProvider provider;
 
     @Autowired
@@ -35,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver resolver;
 
 
-    public String getTokenFromRequest(HttpServletRequest request) {
+    private String getTokenFromRequest(HttpServletRequest request) {
 
         String bearer = request.getHeader(JwtProvider.TOKEN_HEADER);
         if(StringUtils.hasText(bearer) && bearer.startsWith(JwtProvider.TOKEN_PREFIX)) {
@@ -49,29 +48,37 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getTokenFromRequest(request);
 
+        // Validar el token.
+        // Si es válido, autenticar el usuario
+
         try {
 
             if (StringUtils.hasText(token) && provider.isTokenValid(token)) {
 
                 UUID id = provider.getUsuarioIdFromToken(token);
 
-                Usuario usuario = usuarioService.findById(id);
+                Optional<Usuario> result = usuarioRepository.findById(id);
 
-                UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(
-                                usuario,
-                                null,
-                                usuario.getAuthorities()
-                        );
+                if(result.isPresent()) {
 
-                auth.setDetails(new WebAuthenticationDetails(request));
+                    Usuario usuario =  result.get();
 
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(
+                                    usuario,
+                                    null,
+                                    usuario.getAuthorities()
+                            );
+
+                    auth.setDetails(new WebAuthenticationDetails(request));
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
+
             }
 
             filterChain.doFilter(request, response);
         }catch (JwtTokenException ex) {
-            log.info("Authentication error using token JWT: %s".formatted(ex.getMessage()));
             resolver.resolveException(request, response, null, ex);
         }
     }

@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ejemplo_jwt.user.service;
 
+import com.salesianostriana.dam.ejemplo_jwt.user.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioService.findByUsername(username);
+        return usuarioService.findFirstByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Nombre de usuario no encontrado"));
     }
 }

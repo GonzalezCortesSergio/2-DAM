@@ -5,7 +5,7 @@ import com.salesianostriana.dam.ejemplo_jwt.user.model.UsuarioRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.EnumSet;
-import java.util.Set;
+
 
 public record CreateUsuarioDto(
         String username,
