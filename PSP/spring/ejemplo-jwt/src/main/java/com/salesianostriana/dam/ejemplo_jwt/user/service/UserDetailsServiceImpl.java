@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.ejemplo_jwt.service;
+package com.salesianostriana.dam.ejemplo_jwt.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service("userDetailsService")
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UsuarioService usuarioService;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

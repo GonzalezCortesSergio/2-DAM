@@ -1,13 +1,9 @@
-package com.salesianostriana.dam.ejemplo_jwt.model;
+package com.salesianostriana.dam.ejemplo_jwt.user.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.generator.Generator;
 import org.hibernate.proxy.HibernateProxy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,7 +28,6 @@ public class Usuario implements UserDetails {
     private UUID id;
 
     @Column(unique = true, updatable = false)
-    @Setter(AccessLevel.NONE)
     private String username;
 
     private String password;
@@ -41,7 +36,7 @@ public class Usuario implements UserDetails {
     private String avatar;
 
     @Column(length = 500)
-    private String nombreCompleto;
+    private String fullName;
 
     @Builder.Default
     private boolean accountNonExpired = true;
@@ -56,8 +51,7 @@ public class Usuario implements UserDetails {
     private boolean enabled = true;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private Set<UsuarioRol> roles = new HashSet<>();
+    private Set<UsuarioRole> roles;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
