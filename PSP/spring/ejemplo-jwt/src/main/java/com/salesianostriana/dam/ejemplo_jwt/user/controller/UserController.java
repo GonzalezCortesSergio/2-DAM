@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ejemplo_jwt.user.controller;
 
 import com.salesianostriana.dam.ejemplo_jwt.security.jwt.access.JwtProvider;
+import com.salesianostriana.dam.ejemplo_jwt.security.jwt.refresh.JwtRefreshService;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.CreateUsuarioDto;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.LoginRequest;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.UsuarioResponseDto;
@@ -25,6 +26,7 @@ public class UserController {
     private final UsuarioService usuarioService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
+    private final JwtRefreshService jwtRefreshService;
 
 
     @PostMapping("/auth/register")
@@ -53,12 +55,20 @@ public class UserController {
         Usuario usuario = (Usuario) auth.getPrincipal();
 
         String token = jwtProvider.generateToken(usuario);
+        String refreshToken = jwtRefreshService.create(usuario).getId().toString();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioResponseDto.of(usuario, token));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioResponseDto.of(usuario, token, refreshToken));
     }
 
     @GetMapping("/me")
     public UsuarioResponseDto me(@AuthenticationPrincipal Usuario usuario) {
+
+        return UsuarioResponseDto.of(usuario);
+    }
+
+    @GetMapping("/me/admin")
+    public UsuarioResponseDto meAdmin(@AuthenticationPrincipal Usuario usuario) {
 
         return UsuarioResponseDto.of(usuario);
     }

@@ -65,7 +65,7 @@ public class Usuario implements UserDetails {
         return roles.stream()
                 .map(role -> "ROLE_" + role)
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

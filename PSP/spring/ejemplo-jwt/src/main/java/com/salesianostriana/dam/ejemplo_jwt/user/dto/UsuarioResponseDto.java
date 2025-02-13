@@ -14,7 +14,8 @@ public record UsuarioResponseDto(
         String fullName,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
         LocalDateTime createdAt,
-        String token
+        String token,
+        String refreshToken
 ) {
 
     public static UsuarioResponseDto of (Usuario usuario) {
@@ -25,11 +26,12 @@ public record UsuarioResponseDto(
                 usuario.getAvatar(),
                 usuario.getFullName(),
                 usuario.getCreatedAt(),
+                null,
                 null
         );
     }
 
-    public static UsuarioResponseDto of (Usuario usuario, String token) {
+    public static UsuarioResponseDto of (Usuario usuario, String token, String refreshToken) {
 
         return new UsuarioResponseDto(
                 usuario.getId().toString(),
@@ -37,7 +39,8 @@ public record UsuarioResponseDto(
                 usuario.getAvatar(),
                 usuario.getFullName(),
                 usuario.getCreatedAt(),
-                token
+                token,
+                refreshToken
         );
     }
 }

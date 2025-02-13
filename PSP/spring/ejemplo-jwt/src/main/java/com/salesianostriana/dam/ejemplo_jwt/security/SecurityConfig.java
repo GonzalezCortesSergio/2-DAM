@@ -1,9 +1,12 @@
 package com.salesianostriana.dam.ejemplo_jwt.security;
 
+import com.salesianostriana.dam.ejemplo_jwt.security.error.JwtAccessDeniedHandler;
+import com.salesianostriana.dam.ejemplo_jwt.security.error.JwtAuthenticationEntryPoint;
 import com.salesianostriana.dam.ejemplo_jwt.security.jwt.access.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -27,6 +30,8 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
 
     private final JwtFilter authFilter;
+    private final JwtAuthenticationEntryPoint authEntryPoint;
+    private final JwtAccessDeniedHandler accessDeniedHandler;
 
 
     @Bean
@@ -61,10 +66,15 @@ public class SecurityConfig {
         http.sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+        http.exceptionHandling(excepz -> excepz
+                .authenticationEntryPoint(authEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler));
+
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
                 .requestMatchers("/note/**").hasRole("USER")
-                .requestMatchers("/auth/register/admin").hasRole("ADMIN")
+                .requestMatchers("me/admin").hasRole("ADMIN")
                 .anyRequest().authenticated());
 
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

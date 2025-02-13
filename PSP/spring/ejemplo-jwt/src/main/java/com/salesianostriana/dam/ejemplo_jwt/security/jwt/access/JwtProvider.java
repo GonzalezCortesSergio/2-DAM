@@ -6,6 +6,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
+@Log
 public class JwtProvider {
 
     public static final String TOKEN_TYPE = "JWT";
-    public static final String TOKEN_HEADER = "Authentication";
+    public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
 
     @Value("${app.security.jwt.secret}")
@@ -87,6 +89,7 @@ public class JwtProvider {
             parser.parseSignedClaims(token);
             return true;
         }catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+            log.info("Error %s".formatted(ex.getMessage()));
             throw new JwtTokenException(ex.getMessage());
         }
     }
