@@ -20,7 +20,7 @@ public class JwtRefresh {
     @GeneratedValue
     private UUID id;
 
-    
+
     @OneToOne
     @JoinColumn(name = "usuario_id", columnDefinition = "uuid")
     private Usuario usuario;

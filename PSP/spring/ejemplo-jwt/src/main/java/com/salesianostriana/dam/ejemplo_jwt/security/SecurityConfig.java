@@ -74,7 +74,9 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
                 .requestMatchers("/note/**").hasRole("USER")
-                .requestMatchers("me/admin").hasRole("ADMIN")
+                .requestMatchers("/me/admin").hasRole("ADMIN")
+                .requestMatchers("/auth/admin**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/auth/register/admin").hasRole("ADMIN")
                 .anyRequest().authenticated());
 
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

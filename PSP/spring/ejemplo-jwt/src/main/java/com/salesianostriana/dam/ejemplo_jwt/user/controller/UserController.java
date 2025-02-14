@@ -14,10 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -71,5 +68,17 @@ public class UserController {
     public UsuarioResponseDto meAdmin(@AuthenticationPrincipal Usuario usuario) {
 
         return UsuarioResponseDto.of(usuario);
+    }
+
+    @PutMapping("/auth/admin/changeroleadmin/user/{username}")
+    public UsuarioResponseDto changeRoleAdmin (@PathVariable String username) {
+
+        return UsuarioResponseDto.of(usuarioService.changeRoleToAdmin(username));
+    }
+
+    @PutMapping("/auth/admin/changeroleuser/user/{username}")
+    public UsuarioResponseDto changeRoleUser(@PathVariable String username) {
+
+        return UsuarioResponseDto.of(usuarioService.changeRoleToUser(username));
     }
 }

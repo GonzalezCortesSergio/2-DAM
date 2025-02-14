@@ -3,12 +3,13 @@ package com.salesianostriana.dam.ejemplo_jwt.security.error;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.nio.file.AccessDeniedException;
+
 
 @RestControllerAdvice
 public class JwtControllerAdvice extends ResponseEntityExceptionHandler {
@@ -35,8 +36,7 @@ public class JwtControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ProblemDetail handleAccessDeniedException(AccessDeniedException ex,
-                                                     HttpServletRequest request) {
+    public ProblemDetail handleAccessDeniedException(AccessDeniedException ex) {
 
         ProblemDetail detail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN,
                 ex.getMessage());
