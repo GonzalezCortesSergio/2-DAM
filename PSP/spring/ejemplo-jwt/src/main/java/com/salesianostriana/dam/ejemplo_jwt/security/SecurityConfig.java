@@ -72,7 +72,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login", "/auth/refresh/token").permitAll()
                 .requestMatchers("/note/**").hasRole("USER")
                 .requestMatchers("/me/admin").hasRole("ADMIN")
                 .requestMatchers("/auth/admin**").hasRole("ADMIN")

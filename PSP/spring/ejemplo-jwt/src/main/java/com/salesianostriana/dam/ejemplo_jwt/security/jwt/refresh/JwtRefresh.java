@@ -30,4 +30,10 @@ public class JwtRefresh {
 
     @Builder.Default
     private Instant createdAt = Instant.now();
+
+
+    public String getToken() {
+
+        return id.toString();
+    }
 }

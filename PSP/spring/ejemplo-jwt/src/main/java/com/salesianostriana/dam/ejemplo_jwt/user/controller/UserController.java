@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.ejemplo_jwt.user.controller;
 
 import com.salesianostriana.dam.ejemplo_jwt.security.jwt.access.JwtProvider;
+import com.salesianostriana.dam.ejemplo_jwt.security.jwt.refresh.JwtRefresh;
 import com.salesianostriana.dam.ejemplo_jwt.security.jwt.refresh.JwtRefreshService;
+import com.salesianostriana.dam.ejemplo_jwt.security.jwt.refresh.RefreshTokenRequest;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.CreateUsuarioDto;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.LoginRequest;
 import com.salesianostriana.dam.ejemplo_jwt.user.dto.UsuarioResponseDto;
@@ -52,10 +54,10 @@ public class UserController {
         Usuario usuario = (Usuario) auth.getPrincipal();
 
         String token = jwtProvider.generateToken(usuario);
-        String refreshToken = jwtRefreshService.create(usuario).getId().toString();
+        JwtRefresh refreshToken = jwtRefreshService.create(usuario);
 
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioResponseDto.of(usuario, token, refreshToken));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioResponseDto.of(usuario, token, refreshToken.getToken()));
     }
 
     @GetMapping("/me")
@@ -80,5 +82,15 @@ public class UserController {
     public UsuarioResponseDto changeRoleUser(@PathVariable String username) {
 
         return UsuarioResponseDto.of(usuarioService.changeRoleToUser(username));
+    }
+
+
+    @PostMapping("/auth/refresh/token")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest req) {
+
+        String token = req.token();
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(jwtRefreshService.refreshToken(token));
     }
 }
