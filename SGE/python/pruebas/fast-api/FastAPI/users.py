@@ -51,3 +51,11 @@ async def user_query(id: int):
         return {
             "error": "Entity not found"
         }
+    
+
+@app.post("/addUser")
+async def add_user(user: User):
+
+    users.append(user)
+
+    return user
