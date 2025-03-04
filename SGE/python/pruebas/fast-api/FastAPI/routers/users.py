@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from pydantic import BaseModel
+from fastapi import HTTPException
 from http import HTTPStatus
 
 
-
-app = FastAPI()
+router = APIRouter(prefix="/users")
 
 # Entidad User
 
@@ -24,36 +24,32 @@ users = [
     User(id=5, name="Sergio", surname="González Cortés", url="http://web.com", age=19)
 ]
 
-@app.get("/usersjson")
+@router.get("/")
 async def users_json():
 
     return users
 
 # Path parameter
 
-@app.get("/user/{id}")
+@router.get("/{id}", response_model=User)
 async def user_details(id: int):
     try:
         return search_user(id)
     except:
-        return {
-            "error": "Entity not found"
-        }
+        raise HTTPException(404, "Entity not found")
     
 
 # Query parameter
 
-@app.get("/user")
+@router.get("/", response_model=User)
 async def user_query(id: int):
     try:
         return search_user(id)
     except:
-        return {
-            "error": "Entity not found"
-        }
+        raise HTTPException(404, "Entity not found")
     
 
-@app.post("/addUser")
+@router.post("/", status_code=HTTPStatus.CREATED, response_model=User)
 async def add_user(user: User):
 
     users.append(user)
@@ -61,7 +57,7 @@ async def add_user(user: User):
     return user
 
 
-@app.put("/editUser/{id}")
+@router.put("/{id}", response_model=User)
 async def edit_user(user: User, id: int):
     
     found = False
@@ -72,10 +68,20 @@ async def edit_user(user: User, id: int):
             found = True
 
     if not found:
-        return {"error": "Not found"}  
+        raise HTTPException(HTTPStatus.NOT_FOUND, detail="No se ha encontrado el usuario")
 
     return user 
 
+
+@router.delete("/{id}", status_code=204)
+async def delete_user(id: int):
+    try:
+        usuario = search_user(id)
+        users.remove(usuario)
+
+    except:
+        pass
+    
 
 
 def search_user(id: int):
