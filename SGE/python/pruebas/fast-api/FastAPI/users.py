@@ -34,7 +34,7 @@ async def users_json():
 @app.get("/user/{id}")
 async def user_details(id: int):
     try:
-        return list(filter(lambda usuario: usuario.id == id, users))[0]
+        return search_user(id)
     except:
         return {
             "error": "Entity not found"
@@ -46,7 +46,7 @@ async def user_details(id: int):
 @app.get("/user")
 async def user_query(id: int):
     try:
-        return list(filter(lambda usuario: usuario.id == id, users))[0]
+        return search_user(id)
     except:
         return {
             "error": "Entity not found"
@@ -59,3 +59,26 @@ async def add_user(user: User):
     users.append(user)
 
     return user
+
+
+@app.put("/editUser/{id}")
+async def edit_user(user: User, id: int):
+    
+    found = False
+
+    for index, usuario in enumerate(users):
+        if usuario.id == id:
+            users[index] = user
+            found = True
+
+    if not found:
+        return {"error": "Not found"}  
+
+    return user 
+
+
+
+def search_user(id: int):
+
+    return list(filter(lambda usuario: usuario.id == id, users))[0]
+
